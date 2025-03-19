@@ -1,4 +1,5 @@
 import { Button } from '@/components/core/Button/Button';
+import FigmaButton from '@/components/core/Button/FigmaButton';
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
         </div>
 
         <Button>new button</Button>
+        <FigmaButton>FigmaButton !</FigmaButton>
       </main>
     </div>
   );

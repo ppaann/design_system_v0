@@ -6,11 +6,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary-500 hover:bg-primary-600 text-white',
-        disabled: 'bg-gray-300 cursor-not-allowed',
+        secondary: 'bg-white text-gray-800 border-gray-400',
       },
       size: {
         default: 'px-md py-sm',
         large: 'px-6 py-3',
+      },
+      disabled: {
+        false: null,
+        true: ['opacity-50', 'cursor-not-allowed'],
       },
     },
     defaultVariants: {
@@ -22,7 +26,7 @@ const buttonVariants = cva(
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
     ButtonVariants {}
 
 export const Button = ({
@@ -35,11 +39,11 @@ export const Button = ({
   return (
     <button
       className={buttonVariants({
-        variant: disabled ? 'disabled' : variant,
+        variant: variant,
         size,
         className,
       })}
-      disabled={disabled}
+      disabled={disabled || undefined}
       {...props}
     />
   );
