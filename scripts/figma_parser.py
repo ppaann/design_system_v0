@@ -12,7 +12,9 @@ load_dotenv()  # Load environment variables from .env
 # 配置参数
 FIGMA_TOKEN = os.getenv("FIGMA_TOKEN")  # 从环境变量读取Token，避免硬编码
 FILE_ID = "ZuZWPWcPLSqaX8d1p9uTpX"                # 替换为你的Figma文件ID
-NODE_IDS = "3-1377"                  # 替换为你的按钮组件节点ID（多个用逗号分隔）
+NODE_IDS = "58-27"                  # 替换为你的按钮组件节点ID（多个用逗号分隔）
+# https://www.figma.com/design/ZuZWPWcPLSqaX8d1p9uTpX/DesignSystem?node-id=48-12
+# https://www.figma.com/design/ZuZWPWcPLSqaX8d1p9uTpX/DesignSystem?node-id=58-27
 
 # 自定义属性名映射表（可扩展）
 PROPERTY_ALIAS_MAP = {
@@ -141,6 +143,23 @@ def match_token(value: Any, token_type: str, tokens: dict) -> str:
     #     print(f"Token匹配错误: {e}")
     #     return f"error: {str(value)}"  # 保留原始值信息
 
+def extract_component_details(node_data:Dict)->Dict:
+    """
+    从节点名称提取组件详情（组件名、类型、状态）
+    """
+    node_name = node_data.get("name", "")
+    name_parts = node_name.split("/")
+    
+    component_details = {}
+    if len(name_parts) >= 1:
+        component_details["component"] = name_parts[0]
+    if len(name_parts) >= 2:
+        component_details["type"] = name_parts[1]
+    if len(name_parts) >= 3:
+        component_details["state"] = name_parts[2]
+    
+    return component_details
+
 # ================== 主解析逻辑 ==================
 def analyze_node(node_id: str, node_data: Dict, tokens: Dict) -> Tuple[Dict, List]:
     """
@@ -150,14 +169,18 @@ def analyze_node(node_id: str, node_data: Dict, tokens: Dict) -> Tuple[Dict, Lis
     mappings = {}
     unmapped = []
     
-    bound_vars = node_data.get("document", {}).get("boundVariables", {})
+    # Extract component details
+    component_details = extract_component_details(node_data)
+    mappings["component_details"] = component_details
+
+    bound_vars = node_data.get("boundVariables", {})
     
     for raw_prop, var_info in bound_vars.items():
         # 1. 解析属性名
         prop = resolve_property_name(raw_prop)
         
         # 2. 提取实际值
-        success, value = extract_actual_value(node_data["document"], prop)
+        success, value = extract_actual_value(node_data, prop)
         if not success:
             unmapped.append({
                 "node_id": node_id,
@@ -186,31 +209,51 @@ def analyze_node(node_id: str, node_data: Dict, tokens: Dict) -> Tuple[Dict, Lis
     
     return mappings, unmapped
 
+def process_node(nodes:dict, tokens: dict) ->Tuple[dict, dict]:
+    """
+    处理节点数据
+    """
+    # 初始化报告
+    all_mappings = {}
+    all_unmapped = []
+    for node_id, node_data in nodes.items():
+        document = node_data.get("document", {})
+        children = document.get("children", [])
+        
+        for child in children:
+            if child.get("type") == "COMPONENT":
+                node_id = child.get("id")
+                # node_data = nodes.get(node_id, {})
+                mappings, unmapped = analyze_node(node_id, child, tokens)
+                all_mappings[node_id] = mappings
+                all_unmapped.extend(unmapped)
+        
+    return all_mappings, all_unmapped
 # ================== 执行示例 ==================
 def main():
     # 加载现有tokens
-    with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/scripts/tokens.json") as f:
+    with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/tokens.json") as f:
     # with open("tokens.json") as f:
         tokens = json.load(f)
     
     # raw_data是API返回的原始数据
-    with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/scripts/raw.json") as f:
-    # with open("raw.json") as f:
-        raw_data = json.load(f)
-    # raw_data = fetch_figma_data()
-
-    # 初始化报告
-    all_mappings = {}
-    all_unmapped = []
+    # with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/raw.json") as f:
+        # raw_data = json.load(f)
+    raw_data = fetch_figma_data()
+    save_to_json(raw_data, "/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/framed_raw.json")
     
     # 遍历所有节点
-    for node_id, node_data in raw_data.get("nodes", {}).items():
-        mappings, unmapped = analyze_node(node_id, node_data, tokens)
-        all_mappings[node_id] = mappings
-        all_unmapped.extend(unmapped)
+    # 根节点
+    nodes = raw_data.get("nodes", {});
+    all_mappings, all_unmapped = process_node(nodes, tokens);
+
+    # for node_id, node_data in raw_data.get("nodes", {}).items():
+    #     mappings, unmapped = analyze_node(node_id, node_data, tokens)
+    #     all_mappings[node_id] = mappings
+    #     all_unmapped.extend(unmapped)
     
     # 保存结果
-    with open("variable_mappings.json", "w") as f:
+    with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/mapping/framed_variable_mappings.json", "w") as f:
         json.dump(all_mappings, f, indent=2)
 
 
