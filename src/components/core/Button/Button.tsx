@@ -9,7 +9,7 @@ const buttonVariants = cva(
         secondary: 'bg-white text-gray-800 border-gray-400',
       },
       size: {
-        default: 'px-md py-sm',
+        default: 'px-lg py-sm',
         large: 'px-6 py-3',
       },
       disabled: {

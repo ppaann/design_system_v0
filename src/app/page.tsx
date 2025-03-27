@@ -1,5 +1,6 @@
 import { Button } from '@/components/core/Button/Button';
-import FigmaButton from '@/components/core/Button/FigmaButton';
+// import FigmaButton from '@/components/core/Button/FigmaButton';
+import AiButton from '@/components/core/Button/AiButton';
 
 export default function Home() {
   return (
@@ -10,7 +11,8 @@ export default function Home() {
         </div>
 
         <Button>new button</Button>
-        <FigmaButton>FigmaButton !</FigmaButton>
+        {/* <FigmaButton>FigmaButton !</FigmaButton> */}
+        <AiButton>AI Button Second</AiButton>
       </main>
     </div>
   );

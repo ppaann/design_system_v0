@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import tokens from './design-tokens/tokens.json' assert { type: 'json' };
+import tokens from './design_system/tokens.json' assert { type: 'json' };
 
 const transformTokenGroup = (colorTokens, prefix = '') => {
   return Object.entries(colorTokens).reduce((acc, [key, value]) => {
@@ -28,6 +28,6 @@ module.exports = {
   plugins: [],
 };
 
-console.log(transformTokenGroup(tokens.colors));
+console.log('tailwind.config.mjs', transformTokenGroup(tokens.colors));
 
-console.log(transformTokenGroup(tokens.spacing));
+console.log('tailwind.config.mjs', transformTokenGroup(tokens.spacing));

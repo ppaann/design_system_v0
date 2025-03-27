@@ -152,7 +152,7 @@ def extract_component_details(node_data:Dict)->Dict:
     
     component_details = {}
     if len(name_parts) >= 1:
-        component_details["component"] = name_parts[0]
+        component_details["component"] = 'Ai'+name_parts[0]
     if len(name_parts) >= 2:
         component_details["type"] = name_parts[1]
     if len(name_parts) >= 3:
@@ -240,7 +240,7 @@ def main():
     # with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/raw.json") as f:
         # raw_data = json.load(f)
     raw_data = fetch_figma_data()
-    save_to_json(raw_data, "/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/framed_raw.json")
+    save_to_json(raw_data, "/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/raw.json")
     
     # 遍历所有节点
     # 根节点
@@ -253,7 +253,7 @@ def main():
     #     all_unmapped.extend(unmapped)
     
     # 保存结果
-    with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/mapping/framed_variable_mappings.json", "w") as f:
+    with open("/Users/Pan/Projects/Projects/Demo_DesignSystem/demo/design_system/mapping/variable_mappings.json", "w") as f:
         json.dump(all_mappings, f, indent=2)
 
 

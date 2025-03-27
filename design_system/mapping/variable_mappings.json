@@ -1,0 +1,98 @@
+{
+  "48:10": {
+    "component_details": {
+      "component": "AiButton",
+      "type": "default",
+      "state": "Default"
+    },
+    "paddingLeft": {
+      "resolved_property": "paddingLeft",
+      "value": 24.0,
+      "token": "24px",
+      "token_type": "spacing"
+    },
+    "paddingTop": {
+      "resolved_property": "paddingTop",
+      "value": 8.0,
+      "token": "sm",
+      "token_type": "spacing"
+    },
+    "paddingRight": {
+      "resolved_property": "paddingRight",
+      "value": 24.0,
+      "token": "24px",
+      "token_type": "spacing"
+    },
+    "paddingBottom": {
+      "resolved_property": "paddingBottom",
+      "value": 8.0,
+      "token": "sm",
+      "token_type": "spacing"
+    },
+    "rectangleCornerRadii": {
+      "resolved_property": "cornerRadius",
+      "value": 4.0,
+      "token": "base",
+      "token_type": "radius"
+    },
+    "fills": {
+      "resolved_property": "backgroundColor",
+      "value": {
+        "r": 0.23137255012989044,
+        "g": 0.5098039507865906,
+        "b": 0.9647058844566345,
+        "a": 1.0
+      },
+      "token": "primary.500",
+      "token_type": "color"
+    }
+  },
+  "52:104": {
+    "component_details": {
+      "component": "AiButton",
+      "type": "default",
+      "state": "Hover"
+    },
+    "paddingLeft": {
+      "resolved_property": "paddingLeft",
+      "value": 24.0,
+      "token": "24px",
+      "token_type": "spacing"
+    },
+    "paddingTop": {
+      "resolved_property": "paddingTop",
+      "value": 8.0,
+      "token": "sm",
+      "token_type": "spacing"
+    },
+    "paddingRight": {
+      "resolved_property": "paddingRight",
+      "value": 24.0,
+      "token": "24px",
+      "token_type": "spacing"
+    },
+    "paddingBottom": {
+      "resolved_property": "paddingBottom",
+      "value": 8.0,
+      "token": "sm",
+      "token_type": "spacing"
+    },
+    "rectangleCornerRadii": {
+      "resolved_property": "cornerRadius",
+      "value": 4.0,
+      "token": "base",
+      "token_type": "radius"
+    },
+    "fills": {
+      "resolved_property": "backgroundColor",
+      "value": {
+        "r": 0.14509804546833038,
+        "g": 0.38823530077934265,
+        "b": 0.9215686321258545,
+        "a": 1.0
+      },
+      "token": "primary.600",
+      "token_type": "color"
+    }
+  }
+}
