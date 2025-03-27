@@ -1,3 +1,4 @@
+# .github/workflows/chromatic.yml
 name: Chromatic
 
 on:
