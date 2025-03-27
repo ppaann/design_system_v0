@@ -1,4 +1,4 @@
-# .github/workflows/chromatic.yml
+# .github/workflows/chromatic.yml rebased
 name: Chromatic
 
 on:
