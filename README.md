@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🚀 Design-to-Code Automation Toolkit
 
-## Getting Started
+This project is a fully free, semi-automated **UX-to-UI delivery pipeline**, built to streamline the journey from Figma design to production-ready React components. It integrates **Figma Tokens**, **Figma API**, **Tailwind CSS**, **CVA**, and **AI-powered generation** — all wrapped with **GitHub Actions** and **Chromatic** for continuous UI testing.
 
-First, run the development server:
+### ✨ Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🧠 **Token Extraction**  
+  Sync design decisions from Figma Tokens Studio and convert them into Tailwind-compatible utility classes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🔍 **Figma Node Mapping**  
+  Fetch raw component metadata from Figma API and intelligently map it to corresponding token rules.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- ⚙️ **AI-Driven Component Generator**  
+  Use structured prompts to automatically scaffold `class-variance-authority` based React components.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 📘 **AI-Generated Documentation**  
+  Storybook `.stories.tsx` files are auto-created for every generated component, ready for designer-developer handoff.
 
-## Learn More
+- ✅ **CI & Visual Testing**  
+  Every `git push` triggers GitHub Actions and Chromatic, providing automated UI validation and snapshot review.
 
-To learn more about Next.js, take a look at the following resources:
+### 📦 Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Figma Tokens Studio (Free)
+- Figma REST API
+- Tailwind CSS
+- CVA (Class Variance Authority)
+- OpenAI / Claude Prompt Workflows
+- Storybook
+- GitHub Actions
+- Chromatic (Free plan)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📈 Value
 
-## Deploy on Vercel
+This project demonstrates how to:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Bridge design and engineering workflows under real-world tool limitations
+- Apply AI to reduce UI handoff cost while maintaining structure and consistency
+- Integrate CI into design systems for continuous visual testing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+> 💡 This toolkit is ideal for frontend engineers, design system maintainers, or teams seeking to prototype automated design-to-code workflows without relying on paid SaaS tools.
